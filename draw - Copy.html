@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pixel Drawing</title>
+  <style>
+    body { font: 16px Arial, sans-serif; text-align: center; background: #f5f3ed; }
+    #tools { margin: 20px; }
+    #grid { display: grid; grid-template-columns: repeat(16, 1fr); width: min(90vw, 400px); margin: auto; border: 1px solid #555; touch-action: none; }
+    .pixel { aspect-ratio: 1; border: 1px solid #ddd; background: white; }
+    button, input { padding: 7px; }
+  </style>
+</head>
+<body>
+  <h1>Pixel Drawing</h1>
+  <div id="tools">
+    <input id="color" type="color" value="#3366cc">
+    <button id="eraser">Eraser</button>
+    <button id="clear">Clear</button>
+  </div>
+  <div id="grid"></div>
+  <script>
+    const grid = document.querySelector("#grid");
+    const color = document.querySelector("#color");
+    let drawing = false;
+    let erase = false;
+
+    for (let i = 0; i < 256; i++) {
+      const pixel = document.createElement("div");
+      pixel.className = "pixel";
+      pixel.addEventListener("pointerdown", () => paint(pixel));
+      pixel.addEventListener("pointerenter", () => {
+        if (drawing) paint(pixel);
+      });
+      grid.appendChild(pixel);
+    }
+
+    function paint(pixel) {
+      drawing = true;
+      pixel.style.background = erase ? "white" : color.value;
+    }
+
+    document.addEventListener("pointerup", () => drawing = false);
+    document.querySelector("#eraser").addEventListener("click", () => {
+      erase = !erase;
+      document.querySelector("#eraser").textContent = erase ? "Draw" : "Eraser";
+    });
+    document.querySelector("#clear").addEventListener("click", () => {
+      document.querySelectorAll(".pixel").forEach(pixel => pixel.style.background = "white");
+    });
+  </script>
+</body>
+</html>
