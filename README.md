@@ -15,7 +15,7 @@ A lightweight, minimal **HTML-based pixel art drawing game** into a data URI. Th
  Written using  **HTML**, **CSS** grid layouts, and native **JavaScript** for state management and click-and-drag mechanics
 2. **Minification:**
 3.  The source code was compressed to remove unnecessary spaces, comments, and line breaks to minimize characters
- **Base64 Encoding:** The minified HTML string was converted into a Base64 string and prefixed with `data:text/html;base64,` to create the final executable URL.
+ **Base64 Encoding:** The minified HTML string was converted into a base64 string and with data:text/html;base64,` to create the final  URL.
 
 ## Easy
 Easily readable and editable
